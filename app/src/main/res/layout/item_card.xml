@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cn.edu.sicnu.cs.why.myapplication.CrossBoxView
+        android:id="@+id/vCardBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:borderWidth="2dp"
+        app:crossColor="#9E9E9E"
+        app:crossWidth="2dp" />
+
+    <TextView
+        android:id="@+id/tvCardFace"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_card_face"
+        android:gravity="center"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</FrameLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CrossBoxView">
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="crossWidth" format="dimension" />
+        <attr name="crossColor" format="color" />
+    </declare-styleable>
+</resources>

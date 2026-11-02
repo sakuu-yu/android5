@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardGameRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".CardGameActivity">
+
+    <TextView
+        style="@style/AppHeader"
+        android:text="翻牌游戏" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <GridLayout
+            android:id="@+id/gridCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="4"
+            android:padding="8dp"
+            android:rowCount="4"
+            android:useDefaultMargins="false" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="得分：0"
+            android:textColor="#212121"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnReset"
+            android:layout_width="110dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_button_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="重置游戏"
+            android:textColor="#7B2D26"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btnExit"
+            android:layout_width="76dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_button_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="退出"
+            android:textColor="#7B2D26"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

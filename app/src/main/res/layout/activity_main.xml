@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHeader"
+            style="@style/AppHeader"
+            android:text="姓名+学号" />
+
+        <FrameLayout
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp">
+
+            <FrameLayout
+                android:id="@+id/avatarPlaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <cn.edu.sicnu.cs.why.myapplication.CrossBoxView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:borderWidth="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#FFFFFF"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="头像"
+                    android:textColor="#212121"
+                    android:textSize="14sp" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:contentDescription="头像"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="姓名：" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    style="@style/InfoValue"
+                    tools:text="张三" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="性别：" />
+
+                <TextView
+                    android:id="@+id/tvGender"
+                    style="@style/InfoValue"
+                    tools:text="男" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="学号：" />
+
+                <TextView
+                    android:id="@+id/tvStudentId"
+                    style="@style/InfoValue"
+                    tools:text="2023000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="电话：" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    style="@style/InfoValue"
+                    tools:text="13800000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="邮件地址：" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    style="@style/InfoValue"
+                    android:autoLink="email"
+                    tools:text="abc@example.com" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="爱好：" />
+
+                <TextView
+                    android:id="@+id/tvHobbies"
+                    style="@style/InfoValue"
+                    tools:text="旅游、阅读" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/InfoLabel"
+                    android:text="游戏最高分：" />
+
+                <TextView
+                    android:id="@+id/tvBestScore"
+                    style="@style/InfoValue"
+                    tools:text="32" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/btnEditProfile"
+                style="@style/PinkButton"
+                android:text="修改个人信息" />
+
+            <TextView
+                android:id="@+id/btnPlayGame"
+                style="@style/PinkButton"
+                android:layout_marginStart="12dp"
+                android:text="翻牌游戏" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
