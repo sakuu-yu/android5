@@ -29,7 +29,7 @@ class PersonInfoActivity : AppCompatActivity() {
                 pendingAvatarSelected = true
                 showAvatar(AvatarStore.decodeFile(pendingAvatarFile))
             } else {
-                Toast.makeText(this, "无法读取所选图片", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.toast_avatar_error, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -69,16 +69,20 @@ class PersonInfoActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.etPhone).setText(profile.phone)
         findViewById<EditText>(R.id.etEmail).setText(profile.email)
 
-        if (profile.gender == "女") {
+        if (profile.gender == getString(R.string.gender_female)) {
             findViewById<RadioButton>(R.id.rbFemale).isChecked = true
         } else {
             findViewById<RadioButton>(R.id.rbMale).isChecked = true
         }
 
-        findViewById<CheckBox>(R.id.cbTravel).isChecked = profile.hobbies.contains("旅游")
-        findViewById<CheckBox>(R.id.cbReading).isChecked = profile.hobbies.contains("阅读")
-        findViewById<CheckBox>(R.id.cbGame).isChecked = profile.hobbies.contains("游戏")
-        findViewById<CheckBox>(R.id.cbShopping).isChecked = profile.hobbies.contains("购物")
+        findViewById<CheckBox>(R.id.cbTravel).isChecked =
+            profile.hobbies.contains(getString(R.string.hobby_travel))
+        findViewById<CheckBox>(R.id.cbReading).isChecked =
+            profile.hobbies.contains(getString(R.string.hobby_reading))
+        findViewById<CheckBox>(R.id.cbGame).isChecked =
+            profile.hobbies.contains(getString(R.string.hobby_game))
+        findViewById<CheckBox>(R.id.cbShopping).isChecked =
+            profile.hobbies.contains(getString(R.string.hobby_shopping))
 
         showAvatar(AvatarStore.load(this))
     }
@@ -99,12 +103,24 @@ class PersonInfoActivity : AppCompatActivity() {
 
     private fun saveProfile() {
         val hobbies = mutableListOf<String>()
-        if (findViewById<CheckBox>(R.id.cbTravel).isChecked) hobbies.add("旅游")
-        if (findViewById<CheckBox>(R.id.cbReading).isChecked) hobbies.add("阅读")
-        if (findViewById<CheckBox>(R.id.cbGame).isChecked) hobbies.add("游戏")
-        if (findViewById<CheckBox>(R.id.cbShopping).isChecked) hobbies.add("购物")
+        if (findViewById<CheckBox>(R.id.cbTravel).isChecked) {
+            hobbies.add(getString(R.string.hobby_travel))
+        }
+        if (findViewById<CheckBox>(R.id.cbReading).isChecked) {
+            hobbies.add(getString(R.string.hobby_reading))
+        }
+        if (findViewById<CheckBox>(R.id.cbGame).isChecked) {
+            hobbies.add(getString(R.string.hobby_game))
+        }
+        if (findViewById<CheckBox>(R.id.cbShopping).isChecked) {
+            hobbies.add(getString(R.string.hobby_shopping))
+        }
 
-        val gender = if (findViewById<RadioButton>(R.id.rbFemale).isChecked) "女" else "男"
+        val gender = if (findViewById<RadioButton>(R.id.rbFemale).isChecked) {
+            getString(R.string.gender_female)
+        } else {
+            getString(R.string.gender_male)
+        }
 
         val profile = Profile(
             name = findViewById<EditText>(R.id.etName).text.toString().trim(),
@@ -122,7 +138,7 @@ class PersonInfoActivity : AppCompatActivity() {
         }
 
         saved = true
-        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, R.string.toast_save_success, Toast.LENGTH_SHORT).show()
         finish()
     }
 }

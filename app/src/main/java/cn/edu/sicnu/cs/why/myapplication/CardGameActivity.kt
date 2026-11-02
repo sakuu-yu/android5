@@ -72,6 +72,7 @@ class CardGameActivity : AppCompatActivity() {
             params.height = dp(CARD_HEIGHT_DP)
             params.setMargins(dp(CARD_MARGIN_DP), dp(CARD_MARGIN_DP), dp(CARD_MARGIN_DP), dp(CARD_MARGIN_DP))
 
+            cell.contentDescription = getString(R.string.card_description, index + 1)
             cell.setOnClickListener { onCardClicked(index) }
             gridCards.addView(cell, params)
 
@@ -115,7 +116,7 @@ class CardGameActivity : AppCompatActivity() {
             }
         }
 
-        tvScore.text = "得分：${game.score}"
+        tvScore.text = getString(R.string.score_format, game.score)
 
         if (game.score > bestScore) {
             bestScore = game.score

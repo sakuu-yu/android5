@@ -2,6 +2,8 @@
 
 一个包含「个人信息」与「翻牌游戏」的 Android 课程作业项目，使用 Kotlin + XML 布局实现。
 
+> 姓名：王浩宇　学号：2024110536
+
 ## 功能
 
 - **个人信息主页**：显示头像、姓名、性别、学号、电话、邮件地址、爱好以及游戏最高分。
@@ -11,12 +13,16 @@
   - 每次选牌扣 1 分，配对失败扣 2 分
   - 支持「重置游戏」和「退出」
 - **数据持久化**：个人资料、头像与游戏最高分均保存在本地，重启应用后仍然有效。
+- **字符串资源**：所有界面文案均定义在 `res/values/strings.xml`，布局与代码中不直接出现字符串。
+- **主题**：使用 `Theme.MaterialComponents.Light.NoActionBar.Bridge`，保证自定义按钮背景在最新 Material 环境下正常显示。
 
 ## 截图
 
 | 个人信息主页 | 信息修改 | 翻牌游戏 |
 | --- | --- | --- |
 | ![主页](screenshots/home.png) | ![信息修改](screenshots/profile.png) | ![翻牌游戏](screenshots/game.png) |
+
+> 截图为开发阶段示意，实际应用标题为「王浩宇 + 2024110536」。
 
 ## 项目结构
 
@@ -33,6 +39,31 @@ app/src/main/java/
     ├── ProfileStore.kt             # 个人资料 / 最高分存储（SharedPreferences）
     ├── AvatarStore.kt              # 头像读取与保存
     └── CrossBoxView.kt             # 头像占位框 / 卡背叉号绘制
+```
+
+## 测试
+
+**单元测试**（`app/src/test`，纯 JVM，无需设备）：
+
+- `CardTest`：牌面显示、点数/花色匹配规则
+- `DeckTest`：52 张牌唯一性、花色与点数数量
+- `CardMatchingGameTest`：选牌扣分、取消选择、配对加分、失配扣分、已配对牌不可再选
+
+**UI 测试**（`app/src/androidTest`，Espresso）：
+
+- 主页信息与按钮显示
+- 点击「修改个人信息」进入信息修改页
+- 保存后主页信息同步更新
+- 游戏页包含 16 张牌且初始得分为 0
+- 翻牌扣分、重置后得分归零
+- 退出游戏返回主页
+
+```bash
+# 单元测试
+./gradlew testDebugUnitTest
+
+# UI 测试（需要已连接设备或运行中的模拟器）
+./gradlew connectedDebugAndroidTest
 ```
 
 ## 构建与运行

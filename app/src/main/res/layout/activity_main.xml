@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/tvHeader"
             style="@style/AppHeader"
-            android:text="姓名+学号" />
+            android:text="@string/app_name" />
 
         <FrameLayout
             android:layout_width="128dp"
@@ -42,7 +42,7 @@
                     android:background="#FFFFFF"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="头像"
+                    android:text="@string/avatar"
                     android:textColor="#212121"
                     android:textSize="14sp" />
             </FrameLayout>
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
-                android:contentDescription="头像"
+                android:contentDescription="@string/content_desc_avatar"
                 android:scaleType="centerCrop"
                 android:visibility="gone" />
         </FrameLayout>
@@ -72,12 +72,11 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="姓名：" />
+                    android:text="@string/label_name" />
 
                 <TextView
                     android:id="@+id/tvName"
-                    style="@style/InfoValue"
-                    tools:text="张三" />
+                    style="@style/InfoValue" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,12 +87,11 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="性别：" />
+                    android:text="@string/label_gender" />
 
                 <TextView
                     android:id="@+id/tvGender"
-                    style="@style/InfoValue"
-                    tools:text="男" />
+                    style="@style/InfoValue" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,12 +102,11 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="学号：" />
+                    android:text="@string/label_student_id" />
 
                 <TextView
                     android:id="@+id/tvStudentId"
-                    style="@style/InfoValue"
-                    tools:text="2023000000" />
+                    style="@style/InfoValue" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,12 +117,11 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="电话：" />
+                    android:text="@string/label_phone" />
 
                 <TextView
                     android:id="@+id/tvPhone"
-                    style="@style/InfoValue"
-                    tools:text="13800000000" />
+                    style="@style/InfoValue" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,13 +132,12 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="邮件地址：" />
+                    android:text="@string/label_email" />
 
                 <TextView
                     android:id="@+id/tvEmail"
                     style="@style/InfoValue"
-                    android:autoLink="email"
-                    tools:text="abc@example.com" />
+                    android:autoLink="email" />
             </LinearLayout>
 
             <LinearLayout
@@ -153,12 +148,11 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="爱好：" />
+                    android:text="@string/label_hobbies" />
 
                 <TextView
                     android:id="@+id/tvHobbies"
-                    style="@style/InfoValue"
-                    tools:text="旅游、阅读" />
+                    style="@style/InfoValue" />
             </LinearLayout>
 
             <LinearLayout
@@ -169,12 +163,11 @@
 
                 <TextView
                     style="@style/InfoLabel"
-                    android:text="游戏最高分：" />
+                    android:text="@string/label_best_score" />
 
                 <TextView
                     android:id="@+id/tvBestScore"
-                    style="@style/InfoValue"
-                    tools:text="32" />
+                    style="@style/InfoValue" />
             </LinearLayout>
         </LinearLayout>
 
@@ -189,13 +182,13 @@
             <TextView
                 android:id="@+id/btnEditProfile"
                 style="@style/PinkButton"
-                android:text="修改个人信息" />
+                android:text="@string/btn_edit_profile" />
 
             <TextView
                 android:id="@+id/btnPlayGame"
                 style="@style/PinkButton"
                 android:layout_marginStart="12dp"
-                android:text="翻牌游戏" />
+                android:text="@string/btn_play_game" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

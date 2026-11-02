@@ -10,7 +10,7 @@
 
     <TextView
         style="@style/AppHeader"
-        android:text="翻牌游戏" />
+        android:text="@string/title_card_game" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +41,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="得分：0"
             android:textColor="#212121"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -54,7 +53,7 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="重置游戏"
+            android:text="@string/btn_reset"
             android:textColor="#7B2D26"
             android:textSize="16sp" />
 
@@ -67,7 +66,7 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="退出"
+            android:text="@string/btn_exit"
             android:textColor="#7B2D26"
             android:textSize="16sp" />
     </LinearLayout>

@@ -17,7 +17,7 @@
 
         <TextView
             style="@style/AppHeader"
-            android:text="信息修改" />
+            android:text="@string/title_person_info" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                         android:background="#FFFFFF"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="4dp"
-                        android:text="头像"
+                        android:text="@string/avatar"
                         android:textColor="#212121"
                         android:textSize="14sp" />
                 </FrameLayout>
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
-                    android:contentDescription="头像"
+                    android:contentDescription="@string/content_desc_avatar"
                     android:scaleType="centerCrop"
                     android:visibility="gone" />
             </FrameLayout>
@@ -68,7 +68,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="24dp"
                 android:background="@null"
-                android:contentDescription="选择头像"
+                android:contentDescription="@string/content_desc_pick_avatar"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_camera" />
@@ -81,7 +81,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_input"
-            android:hint="姓名"
+            android:hint="@string/hint_name"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
             android:maxLines="1"
@@ -97,7 +97,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_input"
-            android:hint="学号"
+            android:hint="@string/hint_student_id"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLines="1"
@@ -113,7 +113,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_input"
-            android:hint="电话号码"
+            android:hint="@string/hint_phone"
             android:imeOptions="actionNext"
             android:inputType="phone"
             android:maxLines="1"
@@ -129,7 +129,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_input"
-            android:hint="电子邮件地址"
+            android:hint="@string/hint_email"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
             android:maxLines="1"
@@ -149,7 +149,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="性别："
+                android:text="@string/label_gender"
                 android:textColor="#212121"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     app:buttonTint="#444444"
-                    android:text="男"
+                    android:text="@string/gender_male"
                     android:textColor="#212121"
                     android:textSize="16sp" />
 
@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     app:buttonTint="#444444"
-                    android:text="女"
+                    android:text="@string/gender_female"
                     android:textColor="#212121"
                     android:textSize="16sp" />
             </RadioGroup>
@@ -193,7 +193,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="爱好："
+                android:text="@string/label_hobbies"
                 android:textColor="#212121"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -203,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:buttonTint="#444444"
-                android:text="旅游"
+                android:text="@string/hobby_travel"
                 android:textColor="#212121"
                 android:textSize="15sp" />
 
@@ -212,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:buttonTint="#444444"
-                android:text="阅读"
+                android:text="@string/hobby_reading"
                 android:textColor="#212121"
                 android:textSize="15sp" />
 
@@ -221,7 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:buttonTint="#444444"
-                android:text="游戏"
+                android:text="@string/hobby_game"
                 android:textColor="#212121"
                 android:textSize="15sp" />
 
@@ -230,7 +230,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:buttonTint="#444444"
-                android:text="购物"
+                android:text="@string/hobby_shopping"
                 android:textColor="#212121"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -248,7 +248,7 @@
                 android:layout_width="150dp"
                 android:layout_height="56dp"
                 android:layout_weight="0"
-                android:text="保存" />
+                android:text="@string/btn_save" />
 
             <TextView
                 android:id="@+id/btnCancel"
@@ -257,7 +257,7 @@
                 android:layout_height="56dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="0"
-                android:text="取消" />
+                android:text="@string/btn_cancel" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

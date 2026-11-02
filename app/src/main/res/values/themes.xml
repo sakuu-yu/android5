@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyApplication" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!--
+        Bridge 主题可保证在 Material3 环境下自定义按钮背景仍然生效。
+        由于界面使用自绘的灰色标题栏，这里采用 NoActionBar 变体。
+    -->
+    <style name="Base.Theme.MyApplication" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="colorPrimary">#7B2D26</item>
+        <item name="colorPrimaryVariant">#A65353</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />

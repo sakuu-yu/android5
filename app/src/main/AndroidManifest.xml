@@ -25,11 +25,13 @@
         <activity
             android:name=".PersonInfoActivity"
             android:exported="false"
+            android:label="@string/title_person_info"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".CardGameActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/title_card_game" />
     </application>
 
 </manifest>

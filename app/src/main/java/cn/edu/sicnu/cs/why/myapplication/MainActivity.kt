@@ -38,20 +38,17 @@ class MainActivity : AppCompatActivity() {
     private fun renderProfile() {
         val profile = ProfileStore.load(this)
 
-        findViewById<TextView>(R.id.tvHeader).text =
-            if (profile.name.isNotBlank() && profile.studentId.isNotBlank()) {
-                "${profile.name} + ${profile.studentId}"
-            } else {
-                "姓名+学号"
-            }
-
         setValue(R.id.tvName, profile.name)
         setValue(R.id.tvGender, profile.gender)
         setValue(R.id.tvStudentId, profile.studentId)
         setValue(R.id.tvPhone, profile.phone)
         setValue(R.id.tvEmail, profile.email)
         findViewById<TextView>(R.id.tvHobbies).text =
-            if (profile.hobbies.isEmpty()) "未选择" else profile.hobbies.joinToString("、")
+            if (profile.hobbies.isEmpty()) {
+                getString(R.string.value_not_selected)
+            } else {
+                profile.hobbies.joinToString(getString(R.string.hobby_separator))
+            }
         findViewById<TextView>(R.id.tvBestScore).text =
             ProfileStore.bestScore(this).toString()
 
@@ -70,6 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setValue(viewId: Int, value: String) {
-        findViewById<TextView>(viewId).text = value.ifBlank { "未填写" }
+        findViewById<TextView>(viewId).text =
+            value.ifBlank { getString(R.string.value_not_filled) }
     }
 }

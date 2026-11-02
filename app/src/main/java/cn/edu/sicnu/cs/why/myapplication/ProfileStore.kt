@@ -5,7 +5,7 @@ import android.content.Context
 data class Profile(
     val name: String = "",
     val studentId: String = "",
-    val gender: String = "男",
+    val gender: String = "",
     val phone: String = "",
     val email: String = "",
     val hobbies: List<String> = emptyList()
@@ -21,8 +21,6 @@ object ProfileStore {
     private const val KEY_HOBBIES = "hobbies"
     private const val KEY_BEST_SCORE = "best_score"
 
-    val ALL_HOBBIES = listOf("旅游", "阅读", "游戏", "购物")
-
     private fun prefs(context: Context) =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
@@ -32,10 +30,11 @@ object ProfileStore {
             .orEmpty()
             .split(HOBBY_SEPARATOR)
             .filter { it.isNotBlank() }
+        val defaultGender = context.getString(R.string.gender_male)
         return Profile(
             name = p.getString(KEY_NAME, "").orEmpty(),
             studentId = p.getString(KEY_STUDENT_ID, "").orEmpty(),
-            gender = p.getString(KEY_GENDER, "男").orEmpty().ifBlank { "男" },
+            gender = p.getString(KEY_GENDER, defaultGender).orEmpty().ifBlank { defaultGender },
             phone = p.getString(KEY_PHONE, "").orEmpty(),
             email = p.getString(KEY_EMAIL, "").orEmpty(),
             hobbies = hobbies

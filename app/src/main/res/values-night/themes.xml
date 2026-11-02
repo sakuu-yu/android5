@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyApplication" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <!-- 应用固定使用浅色界面，夜间模式保持与日间一致。 -->
+    <style name="Base.Theme.MyApplication" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="colorPrimary">#7B2D26</item>
+        <item name="colorPrimaryVariant">#A65353</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
     </style>
 </resources>
