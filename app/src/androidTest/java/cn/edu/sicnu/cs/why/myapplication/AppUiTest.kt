@@ -2,9 +2,10 @@ package cn.edu.sicnu.cs.why.myapplication
 
 import android.content.Context
 import android.view.View
-import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.replaceText
@@ -31,13 +32,24 @@ class AppUiTest {
     @Test
     fun mainScreenShowsProfileFieldsAndActions() {
         ActivityScenario.launch(MainActivity::class.java).use {
-            onView(withId(R.id.tvHeader)).check(matches(withText(R.string.app_name)))
+            onView(withId(R.id.toolbar)).check(matches(isDisplayed()))
             onView(withId(R.id.tvName)).check(matches(isDisplayed()))
             onView(withId(R.id.tvGender)).check(matches(isDisplayed()))
             onView(withId(R.id.tvStudentId)).check(matches(isDisplayed()))
             onView(withId(R.id.tvBestScore)).check(matches(isDisplayed()))
             onView(withId(R.id.btnEditProfile)).check(matches(withText(R.string.btn_edit_profile)))
             onView(withId(R.id.btnPlayGame)).check(matches(withText(R.string.btn_play_game)))
+        }
+    }
+
+    @Test
+    fun aboutMenuShowsAboutDialog() {
+        ActivityScenario.launch(MainActivity::class.java).use {
+            openActionBarOverflowOrOptionsMenu(context)
+            onView(withText(R.string.menu_about)).perform(click())
+
+            onView(withText(R.string.about_title)).check(matches(isDisplayed()))
+            onView(withText(R.string.about_message)).check(matches(isDisplayed()))
         }
     }
 
@@ -74,11 +86,14 @@ class AppUiTest {
     }
 
     @Test
-    fun gameScreenHasSixteenCardsAndStartsAtZero() {
+    fun gameScreenHasConfiguredCardCountAndStartsAtZero() {
+        val expectedCards = context.resources.getInteger(R.integer.card_count)
+
         ActivityScenario.launch(MainActivity::class.java).use {
             onView(withId(R.id.btnPlayGame)).perform(click())
 
-            onView(withId(R.id.gridCards)).check(matches(withChildCount(16)))
+            onView(withId(R.id.rvCards))
+                .check(matches(withAdapterItemCount(expectedCards)))
             onView(withId(R.id.tvScore))
                 .check(matches(withText(context.getString(R.string.score_format, 0))))
         }
@@ -110,13 +125,13 @@ class AppUiTest {
         }
     }
 
-    private fun withChildCount(expectedCount: Int): Matcher<View> =
+    private fun withAdapterItemCount(expectedCount: Int): Matcher<View> =
         object : TypeSafeMatcher<View>() {
             override fun describeTo(description: Description) {
-                description.appendText("with $expectedCount children")
+                description.appendText("RecyclerView with $expectedCount items")
             }
 
             override fun matchesSafely(view: View): Boolean =
-                view is ViewGroup && view.childCount == expectedCount
+                view is RecyclerView && view.adapter?.itemCount == expectedCount
         }
 }

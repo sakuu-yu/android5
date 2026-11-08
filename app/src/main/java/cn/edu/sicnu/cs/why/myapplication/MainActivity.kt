@@ -2,11 +2,15 @@ package cn.edu.sicnu.cs.why.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -22,12 +26,38 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        setSupportActionBar(findViewById<Toolbar>(R.id.toolbar))
+
         findViewById<View>(R.id.btnEditProfile).setOnClickListener {
             startActivity(Intent(this, PersonInfoActivity::class.java))
         }
         findViewById<View>(R.id.btnPlayGame).setOnClickListener {
             startActivity(Intent(this, CardGameActivity::class.java))
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_about -> {
+                showAboutDialog()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showAboutDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.about_title)
+            .setMessage(R.string.about_message)
+            .setPositiveButton(R.string.btn_ok, null)
+            .show()
     }
 
     override fun onResume() {

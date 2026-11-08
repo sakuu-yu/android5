@@ -38,8 +38,15 @@
     <string name="toast_avatar_error">无法读取所选图片</string>
     <string name="toast_save_success">保存成功</string>
 
+    <!-- 菜单与关于对话框 -->
+    <string name="menu_about">关于</string>
+    <string name="about_title">关于本应用</string>
+    <string name="about_message">RecyclerView 三张牌配对游戏\n\n姓名：王浩宇\n学号：2024110536\n\n实验五：RecyclerView、菜单与对话框、MVC 设计模式</string>
+    <string name="btn_ok">确定</string>
+
     <!-- 翻牌游戏界面 -->
     <string name="title_card_game">翻牌游戏</string>
+    <string name="game_rule">规则：连续翻开三张牌，三张牌点数相同或花色相同即可配对</string>
     <string name="score_format">得分：%1$d</string>
     <string name="btn_reset">重置游戏</string>
     <string name="btn_exit">退出</string>

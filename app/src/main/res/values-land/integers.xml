@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 横屏：18 张牌，9 列 2 行；与竖屏牌数不同，由资源文件自动切换 -->
+    <integer name="card_count">18</integer>
+    <integer name="card_columns">9</integer>
+</resources>
