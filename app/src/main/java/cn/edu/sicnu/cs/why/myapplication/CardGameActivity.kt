@@ -1,33 +1,34 @@
 package cn.edu.sicnu.cs.why.myapplication
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.GridLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.edu.sicnu.cardgame.CardMatchingGame
 
+/**
+ * Controller of the game. The Activity owns the [CardMatchingGame] model,
+ * configures the RecyclerView with the [CardAdapter], and reacts to card
+ * clicks and button presses.
+ *
+ * The card count and column count come from integer resources, so the
+ * portrait and landscape layouts can use different numbers of cards.
+ */
 class CardGameActivity : AppCompatActivity() {
 
-    companion object {
-        private const val CARD_COUNT = 16
-        private const val COLUMNS = 4
-        private const val CARD_HEIGHT_DP = 98
-        private const val CARD_MARGIN_DP = 4
-    }
-
-    private var game = CardMatchingGame(CARD_COUNT)
-    private lateinit var gridCards: GridLayout
+    private lateinit var game: CardMatchingGame
+    private lateinit var adapter: CardAdapter
+    private lateinit var rvCards: RecyclerView
     private lateinit var tvScore: TextView
 
-    private val cells = mutableListOf<View>()
-    private val faces = mutableListOf<TextView>()
-    private val backs = mutableListOf<View>()
-
+    private var cardCount = 0
+    private var columns = 0
     private var bestScore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,82 +41,42 @@ class CardGameActivity : AppCompatActivity() {
             insets
         }
 
+        cardCount = resources.getInteger(R.integer.card_count)
+        columns = resources.getInteger(R.integer.card_columns)
+        game = CardMatchingGame(cardCount)
         bestScore = ProfileStore.bestScore(this)
-        gridCards = findViewById(R.id.gridCards)
+
         tvScore = findViewById(R.id.tvScore)
+        rvCards = findViewById(R.id.rvCards)
+        rvCards.layoutManager = GridLayoutManager(this, columns)
+
+        adapter = CardAdapter(game) { index -> onCardClicked(index) }
+        rvCards.adapter = adapter
+        rvCards.doOnLayout {
+            val size = calculateCardSize(rvCards)
+            // Post the update so notifyDataSetChanged runs outside the layout pass.
+            rvCards.post { adapter.setCardSize(size) }
+        }
 
         findViewById<View>(R.id.btnReset).setOnClickListener { startNewGame() }
         findViewById<View>(R.id.btnExit).setOnClickListener { finish() }
 
-        buildBoard()
+        updateScore()
     }
 
     private fun startNewGame() {
-        game = CardMatchingGame(CARD_COUNT)
-        buildBoard()
-    }
-
-    private fun buildBoard() {
-        gridCards.removeAllViews()
-        cells.clear()
-        faces.clear()
-        backs.clear()
-
-        for (index in 0 until game.cardCount) {
-            val cell = layoutInflater.inflate(R.layout.item_card, gridCards, false)
-
-            val params = GridLayout.LayoutParams(
-                GridLayout.spec(index / COLUMNS),
-                GridLayout.spec(index % COLUMNS, 1f)
-            )
-            params.width = 0
-            params.height = dp(CARD_HEIGHT_DP)
-            params.setMargins(dp(CARD_MARGIN_DP), dp(CARD_MARGIN_DP), dp(CARD_MARGIN_DP), dp(CARD_MARGIN_DP))
-
-            cell.contentDescription = getString(R.string.card_description, index + 1)
-            cell.setOnClickListener { onCardClicked(index) }
-            gridCards.addView(cell, params)
-
-            cells.add(cell)
-            faces.add(cell.findViewById(R.id.tvCardFace))
-            backs.add(cell.findViewById(R.id.vCardBack))
-        }
-
-        refreshBoard()
+        game.reset()
+        adapter.notifyDataSetChanged()
+        updateScore()
     }
 
     private fun onCardClicked(index: Int) {
-        if (game.cardAtIndex(index).isMatched) return
         game.chooseCardAtIndex(index)
-        refreshBoard()
+        adapter.notifyDataSetChanged()
+        updateScore()
     }
 
-    private fun refreshBoard() {
-        for (index in 0 until game.cardCount) {
-            val card = game.cardAtIndex(index)
-            val face = faces[index]
-            val back = backs[index]
-            val cell = cells[index]
-
-            when {
-                card.isMatched -> {
-                    showFace(face, back, index, matched = true)
-                    cell.alpha = 0.55f
-                }
-
-                card.isChosen -> {
-                    showFace(face, back, index, matched = false)
-                    cell.alpha = 1f
-                }
-
-                else -> {
-                    face.visibility = View.GONE
-                    back.visibility = View.VISIBLE
-                    cell.alpha = 1f
-                }
-            }
-        }
-
+    private fun updateScore() {
         tvScore.text = getString(R.string.score_format, game.score)
 
         if (game.score > bestScore) {
@@ -124,21 +85,23 @@ class CardGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun showFace(face: TextView, back: View, index: Int, matched: Boolean) {
-        val text = game.cardAtIndex(index).toString()
-        face.text = text
-        face.setTextColor(
-            if (text.contains("♥") || text.contains("♦")) {
-                Color.parseColor("#C62828")
-            } else {
-                Color.parseColor("#212121")
-            }
-        )
-        face.setBackgroundResource(
-            if (matched) R.drawable.bg_card_matched else R.drawable.bg_card_face
-        )
-        face.visibility = View.VISIBLE
-        back.visibility = View.GONE
+    /**
+     * Picks the largest square that fits in each grid cell. Cards are centred
+     * in their cells, so the board stays tidy in both orientations.
+     */
+    private fun calculateCardSize(recycler: RecyclerView): Int {
+        if (columns <= 0 || cardCount <= 0) return 0
+        val rows = (cardCount + columns - 1) / columns
+        val spacing = dp(6)
+
+        val availableWidth =
+            recycler.width - recycler.paddingLeft - recycler.paddingRight
+        val availableHeight =
+            recycler.height - recycler.paddingTop - recycler.paddingBottom
+
+        val cellWidth = availableWidth / columns
+        val cellHeight = availableHeight / rows
+        return maxOf(minOf(cellWidth, cellHeight) - spacing, dp(40))
     }
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
